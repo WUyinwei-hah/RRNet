@@ -350,13 +350,13 @@ def parse_args():
     parser.add_argument(
         "--data_folder",
         type=str,
-        default="./RRdataset-v1/inside/",
+        default="./Dataset/contain/",
         help="Path to your dataset",
     )
     parser.add_argument(
         "--save_folder",
         type=str,
-        default="./RRdataset-v1/generation_result",
+        default="./generation_result",
         help="Path to save your checkpoints and results",
     )
     

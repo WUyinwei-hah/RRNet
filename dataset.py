@@ -1,5 +1,5 @@
 import torch
-from GNN import create_hg_A_ARB, create_hg_A_ARB_self_loop
+from GNN import create_hg_A_ARB_self_loop
 from torch.utils.data import Dataset
 import random
 import os
@@ -80,13 +80,13 @@ class HeteGraphDataset:
         A_eot_embedding, A_sentence_embedding, A_eot_pos = self.get_sentence_eot_embeddings(text_encoder, get_object_sentence(A_word), device)
         B_eot_embedding, B_sentence_embedding, B_eot_pos = self.get_sentence_eot_embeddings(text_encoder, get_object_sentence(B_word), device)
         
-        if self_loop:
+        # if self_loop:
             
-            h_graph_ARB, node_features_ARB = create_hg_A_ARB_self_loop(A_word_embedding, R_word_embedding, B_word_embedding, A_eot_embedding, ARB_eot, device)
-            h_graph_BRA, node_features_BRA = create_hg_A_ARB_self_loop(B_word_embedding, R_word_embedding, A_word_embedding, B_eot_embedding, BRA_eot, device)
-        else:
-            h_graph_ARB, node_features_ARB = create_hg_A_ARB(A_word_embedding, R_word_embedding, B_word_embedding, A_eot_embedding, ARB_eot, device)
-            h_graph_BRA, node_features_BRA = create_hg_A_ARB(B_word_embedding, R_word_embedding, A_word_embedding, B_eot_embedding, BRA_eot, device)
+        h_graph_ARB, node_features_ARB = create_hg_A_ARB_self_loop(A_word_embedding, R_word_embedding, B_word_embedding, A_eot_embedding, ARB_eot, device)
+        h_graph_BRA, node_features_BRA = create_hg_A_ARB_self_loop(B_word_embedding, R_word_embedding, A_word_embedding, B_eot_embedding, BRA_eot, device)
+        # else:
+        #     h_graph_ARB, node_features_ARB = create_hg_A_ARB(A_word_embedding, R_word_embedding, B_word_embedding, A_eot_embedding, ARB_eot, device)
+        #     h_graph_BRA, node_features_BRA = create_hg_A_ARB(B_word_embedding, R_word_embedding, A_word_embedding, B_eot_embedding, BRA_eot, device)
             
             
         A_img = random.choice(self.A_imgs)
