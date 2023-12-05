@@ -1,0 +1,10 @@
+{
+    "A":"car",
+    "R":"beneath",
+    "B":"bridge",
+    "ARB": "there is a car beneath bridge",
+    "BRA": "there is a bridge beneath car",
+    "ARB_dir": "a car beneath bridge",
+    "BRA_dir": "a bridge beneath car"
+
+}

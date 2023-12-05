@@ -1,0 +1,10 @@
+{
+    "A":"book",
+    "R":"placed",
+    "B":"bowl",
+    "ARB": "a book is placed on a bowl",
+    "BRA": "a bowl is placed on the book",
+    "ARB_dir": "a book is placed on a bowl",
+    "BRA_dir": "a bowl is placed on the book"
+
+}

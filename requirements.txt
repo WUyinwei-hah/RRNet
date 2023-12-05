@@ -1,0 +1,7 @@
+datasets==2.13.0
+dgl==1.0.2+cu118
+diffusers==0.18.0
+huggingface-hub==0.17.3
+torch==1.12.0
+transformers==4.35.0
+Pillow==9.5.0

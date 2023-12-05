@@ -1,0 +1,10 @@
+{
+    "A":"car",
+    "R":"contains",
+    "B":"bottle",
+    "ARB": "a car contains bottle",
+    "BRA": "a bottle contains car",
+    "ARB_dir": "a car contains bottle",
+    "BRA_dir": "a bottle contains car"
+
+}

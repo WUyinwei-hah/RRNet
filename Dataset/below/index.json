@@ -1,0 +1,10 @@
+{
+    "A":"panda",
+    "R":"below",
+    "B":"desk",
+    "ARB": "there is a panda below desk",
+    "BRA": "there is a desk below panda",
+    "ARB_dir": "there is a panda below desk",
+    "BRA_dir": "there is a desk below panda"
+
+}
