@@ -5,6 +5,51 @@ import random
 import os
 from PIL import Image
 
+
+def generate_hg(A, B, R, prompt, tokenizer, embeddings, text_encoder, device):
+    def get_word_embeddings(embedding, word, device):
+        txt_id = tokenizer(
+                [word],
+                padding="do_not_pad",
+                truncation=True,
+                max_length=tokenizer.model_max_length,
+                return_tensors="pt",
+            ).input_ids.to(device)
+        word_embedding = embedding(txt_id[0, 1])
+        word_embedding = word_embedding.unsqueeze(0)
+        return word_embedding
+    def get_eot_postiton(sentence):
+        untruncated_ids = tokenizer([sentence], padding="longest", return_tensors="pt").input_ids
+        eot_pos = len(untruncated_ids[0])-1
+        return eot_pos
+    def get_sentence_eot_embeddings(text_encoder, sentence, device):
+        txt_id = tokenizer(
+                [sentence],
+                padding="max_length",
+                truncation=True,
+                max_length=tokenizer.model_max_length,
+                return_tensors="pt",
+            ).input_ids.to(device)
+        eot_pos = get_eot_postiton(sentence)
+        sentence_embedding = text_encoder(txt_id)[0].to(device)[0]
+        eot_embedding = sentence_embedding[eot_pos]
+        eot_embedding = eot_embedding.unsqueeze(0)
+        return eot_embedding, sentence_embedding.unsqueeze(0), eot_pos
+    def get_object_sentence(obj):
+            return f"this is a photo of {obj}"
+    
+    A_word_embedding = get_word_embeddings(embeddings, A, device)
+    R_word_embedding = get_word_embeddings(embeddings, R, device)
+    B_word_embedding = get_word_embeddings(embeddings, B, device)
+    ARB_eot, ARB_sentence_embedding, ARB_eot_pos = get_sentence_eot_embeddings(text_encoder, prompt, device)
+    A_eot_embedding, A_sentence_embedding, A_eot_pos = get_sentence_eot_embeddings(text_encoder, get_object_sentence(A), device)
+    
+    h_graph_ARB, node_features_ARB = create_hg_A_ARB_self_loop(A_word_embedding, R_word_embedding, B_word_embedding, A_eot_embedding, ARB_eot, device)
+    
+    return h_graph_ARB, ARB_sentence_embedding, node_features_ARB, ARB_eot_pos
+
+
+
 class HeteGraphDataset:
     def __init__(self, base_path, A, B, R, ARB, BRA, ARB_dir, BRA_dir, image_processor, tokenizer, transform=None):
 

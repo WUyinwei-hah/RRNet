@@ -1,4 +1,5 @@
 import gradio as gr
+from inference import generate_fn
 
 prompt_tips = '''
 The \<A\> and \<B\> are the first and second entities appeared in the prompt respectively. The \<R\> is the relationship between them.
@@ -7,7 +8,7 @@ def create_view():
     with gr.Blocks() as demo:
         with gr.Row():
             with gr.Column():
-                exemplar_img = gr.Image(
+                sd_generation = gr.Image(
                     label='Original Stable Diffusion Output',
                     type='pil',
                     interactive=False
@@ -54,37 +55,35 @@ def create_view():
                                                value=50)
 
 
-#         prompt.submit(
-#             fn=func,
-#             # inputs=[
-#             #     model_id,
-#             #     prompt,
-#             #     num_samples,
-#             #     guidance_scale,
-#             #     ddim_steps
-#             # ],
-#             inputs=[
-#                 prompt,
-#                 num_samples,
-#                 guidance_scale,
-#                 ddim_steps
-#             ],
-#             outputs=result,
-#             queue=False
-#         )
+        prompt.submit(
+            fn=generate_fn,
+            inputs=[
+                prompt,
+                A,
+                R,
+                B,
+                guidance_scale,
+                adjustment_scale,
+                ddim_steps
+            ],
+            outputs=(sd_generation, result),
+            queue=False
+        )
 
-#         run_button.click(
-#             fn=func,
-#             inputs=[
-#                 exemplar_dataset,
-#                 prompt,
-#                 num_samples,
-#                 guidance_scale,
-#                 ddim_steps
-#             ],
-#             outputs=result,
-#             queue=False
-#         )
+        run_button.click(
+            fn=generate_fn,
+            inputs=[
+                prompt,
+                A,
+                R,
+                B,
+                guidance_scale,
+                adjustment_scale,
+                ddim_steps
+            ],
+            outputs=(sd_generation, result),
+            queue=False
+        )
     return demo
 
 TITLE = '# RRNET'
