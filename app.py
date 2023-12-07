@@ -4,6 +4,17 @@ from inference import generate_fn
 prompt_tips = '''
 The \<A\> and \<B\> are the first and second entities appeared in the prompt respectively. The \<R\> is the relationship between them.
 '''
+
+
+def check_input_format(words):
+    input_string = words.strip()
+    if " " in input_string:
+        gr.Warning(f'Expect only one word, but received {words}.')
+        return input_string.split()[0]
+    else:
+        return words
+    
+    
 def create_view():
     with gr.Blocks() as demo:
         with gr.Row():
@@ -31,6 +42,9 @@ def create_view():
                     label='<B>',
                     max_lines=1,
                     placeholder='car')
+                
+                A.input(check_input_format, A, A)
+                B.input(check_input_format, B, B)
 
 
 

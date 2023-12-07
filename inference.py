@@ -64,14 +64,13 @@ def generate_fn(prompt, A, R, B, guidance_scale, adjustment_scale, ddim_steps):
     gnn_model.requires_grad_(False)
     embeddings = text_encoder.get_input_embeddings()
 
-    ARB = prompt
 
     
     h_graph_ARB, ARB_sentence_embedding, node_features_ARB, ARB_eot_pos = generate_hg(A, B, R, prompt, tokenizer, embeddings, text_encoder, device)
     gnn_model.eval()
     text_encoder.eval()
-    save_path = "./models"
-    gnn_model.load_state_dict(torch.load(os.path.join(save_path, f"gat_{R}")))
+    save_path = "./gnn_models"
+    gnn_model.load_state_dict(torch.load(os.path.join(save_path, f"gat_{R}"), map_location=device)) 
     # Training finished, start generating
     seed = random.randint(1, 1000000000)
 
