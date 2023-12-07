@@ -26,9 +26,11 @@ import argparse
 
 
 
+
 def load_models(device):
     # stable_diffusion_version = "CompVis/stable-diffusion-v1-4"
-    stable_diffusion_version = "stabilityai/stable-diffusion-2-1-base"
+    stable_diffusion_version = "/root/autodl-tmp/models/models--stabilityai--stable-diffusion-2-1-base/snapshots/5ede9e4bf3e3fd1cb0ef2f7a3fff13ee514fdf06"
+    # stable_diffusion_version = "stabilityai/stable-diffusion-2-1-base"
     # cache_dir="/root/autodl-tmp/models/models--stabilityai--stable-diffusion-2-1-base/snapshots/5ede9e4bf3e3fd1cb0ef2f7a3fff13ee514fdf06"
     stable = StableDiffusionPipeline.from_pretrained(stable_diffusion_version).to(device)
     tokenizer = CLIPTokenizer.from_pretrained(stable_diffusion_version, subfolder="tokenizer")
@@ -60,16 +62,13 @@ def generate_fn(prompt, A, R, B, guidance_scale, adjustment_scale, ddim_steps):
     unet.requires_grad_(False)
     text_encoder.text_model.requires_grad_(False)
     gnn_model = RGAT(1024, 512, 1024, ['link_oe', 'link_or', 'link_re', 'link_ro', 'link_oo']).to(device)
-
     gnn_model.requires_grad_(False)
     embeddings = text_encoder.get_input_embeddings()
 
-
-    
     h_graph_ARB, ARB_sentence_embedding, node_features_ARB, ARB_eot_pos = generate_hg(A, B, R, prompt, tokenizer, embeddings, text_encoder, device)
     gnn_model.eval()
     text_encoder.eval()
-    save_path = "./gnn_models"
+    save_path = "./demo_models"
     gnn_model.load_state_dict(torch.load(os.path.join(save_path, f"gat_{R}"), map_location=device)) 
     # Training finished, start generating
     seed = random.randint(1, 1000000000)
