@@ -74,7 +74,7 @@ def generate(args):
     h_graph_ARB, node_features_ARB, h_graph_BRA, node_features_BRA\
     = hete_dataset.sample(A, R, B, ARB, BRA, text_encoder, embeddings, device)
     
-    torch.save(gnn_model.state_dict(), os.path.join(save_path, f"gat_{R}"))
+    gnn_model.load_state_dict(torch.load(os.path.join(save_path, f"gat_{R}"), map_location=torch.device('cuda')))
 
     # Training finished, start generating
     s = 0
