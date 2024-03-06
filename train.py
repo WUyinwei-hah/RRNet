@@ -38,7 +38,11 @@ def load_models(device):
     return stable, tokenizer, noise_scheduler, vae, unet, text_encoder, image_processor
 
 def importance_sampling_fn(t, max_t, alpha):
-    """Importance Sampling Function f(t)"""
+    """
+    Importance Sampling Function f(t)
+    Borrow from https://github.com/ziqihuangg/ReVersion
+    """
+  
     return 1 / max_t * (1 - alpha * math.cos(math.pi * t / max_t))
     
 def get_paired_latent(vae, img1, img2, device, bsz=1):
