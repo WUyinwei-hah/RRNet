@@ -25,7 +25,7 @@ Yinwei Wu&emsp;Xingyi Yang&emsp;Xinchao Wang<sup>&dagger;</sup>
 
 ---
 ## Overview
-![overall_structure](https://wuyinwei-hah.github.io/rrnet.github.io/static/images/cover.png)
+![overall_structure](./assets/structure.jpg)
 
 ---
 
