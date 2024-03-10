@@ -370,7 +370,12 @@ def parse_args():
         default=100,
         help="The training epochs of RRNet",
     )
-
+    parser.add_argument(
+        "--hidden_size",
+        type=int,
+        default=512,
+        help="The hidden size of graph neural network",
+    )
     parser.add_argument(
         "--num_sample",
         type=int,

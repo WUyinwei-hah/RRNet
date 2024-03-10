@@ -74,13 +74,14 @@ def generate(args):
     h_graph_ARB, node_features_ARB, h_graph_BRA, node_features_BRA\
     = hete_dataset.sample(A, R, B, ARB, BRA, text_encoder, embeddings, device)
     
-    gnn_model.load_state_dict(torch.load(os.path.join(save_path, f"gat_{R}"), map_location=torch.device('cuda')))
 
     # Training finished, start generating
     s = 0
     save_path = os.path.join(args.save_folder, R)
     relation_base_dir = save_path
     prompt_pair = [ARB, BRA]
+    gnn_model.load_state_dict(torch.load(os.path.join(save_path, f"gat_{R}"), map_location=torch.device('cuda')))
+    
     relation0_dir = os.path.join(relation_base_dir, prompt_pair[0])
     relation1_dir = os.path.join(relation_base_dir, prompt_pair[1])
     if not os.path.exists(relation0_dir):
@@ -147,6 +148,13 @@ def parse_args():
         type=str,
         default="./RRdataset-v1/generation_result",
         help="Path to your saved checkpoint",
+    )
+    
+    parser.add_argument(
+        "--hidden_size",
+        type=int,
+        default=512,
+        help="The hidden size of graph neural network",
     )
     
     parser.add_argument(
