@@ -29,8 +29,7 @@ import argparse
 
 def load_models(device):
     # stable_diffusion_version = "CompVis/stable-diffusion-v1-4"
-    stable_diffusion_version = "/root/autodl-tmp/models/models--stabilityai--stable-diffusion-2-1-base/snapshots/5ede9e4bf3e3fd1cb0ef2f7a3fff13ee514fdf06"
-    # stable_diffusion_version = "stabilityai/stable-diffusion-2-1-base"
+    stable_diffusion_version = "stabilityai/stable-diffusion-2-1-base"
     # cache_dir="/root/autodl-tmp/models/models--stabilityai--stable-diffusion-2-1-base/snapshots/5ede9e4bf3e3fd1cb0ef2f7a3fff13ee514fdf06"
     stable = StableDiffusionPipeline.from_pretrained(stable_diffusion_version).to(device)
     tokenizer = CLIPTokenizer.from_pretrained(stable_diffusion_version, subfolder="tokenizer")
