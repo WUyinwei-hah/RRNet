@@ -43,7 +43,7 @@ def load_models(device):
 
 prompt_tips = '''
 The \<A\> and \<B\> are the first and second entities appeared in the prompt respectively. The \<R\> is the relationship between them.
-Here are some examplar prompts for you to play with:
+Here are some example prompts for you to play with:
 <pre>
 1.                                             2. 
 prompt: A bottle contains a car                prompt: A book is placed on the bowl
