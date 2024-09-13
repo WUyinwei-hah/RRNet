@@ -17,11 +17,15 @@ Yinwei Wu&emsp;Xingyi Yang&emsp;Xinchao Wang<sup>&dagger;</sup>
 
 <div>
 <a target="_blank" href="https://arxiv.org/abs/2403.20249">
-  <img src="https://img.shields.io/badge/arXiv-2312.17142-b31b1b.svg" alt="arXiv Paper"/>
+  <img src="https://img.shields.io/badge/arXiv-2403.20249-b31b1b.svg" alt="arXiv Paper"/>
 </a>
 
 <a target="_blank" href="https://wuyinwei-hah.github.io/rrnet.github.io/">
   <img src="https://img.shields.io/badge/Project-Page-blue" alt="arXiv Paper"/>
+</a>
+<!-- [![Website](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://shields.io/) -->
+<a target="_blank" href="https://cvpr.thecvf.com/virtual/2024/poster/30070">
+  <img src="https://img.shields.io/badge/CVPR-Poster-green" alt="CVPR Poster"/>
 </a>
 </div>
 </div>
